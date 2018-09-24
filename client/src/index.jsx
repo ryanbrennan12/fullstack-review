@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,14 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:1128/repos',
+      data: data,
+      success: ((data) => {
+        console.log('This is the data: ', data)
+      })
+    })
     // TODO
   }
 

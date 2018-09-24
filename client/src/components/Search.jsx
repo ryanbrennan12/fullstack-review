@@ -9,7 +9,6 @@ class Search extends React.Component {
   }
 
   onChange (e) {
-    console.log('this is e', e)
     this.setState({
       term: e.target.value
     });
@@ -18,7 +17,7 @@ class Search extends React.Component {
   search() {
     this.props.onSearch(this.state.term);
   }
-
+//
   render() {
     return (<div>
       <h4>Add more repos!</h4>
@@ -29,4 +28,3 @@ class Search extends React.Component {
 }
 
 export default Search;
-
