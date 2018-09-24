@@ -11,6 +11,10 @@ let repoSchema = mongoose.Schema({
     unique: true,
     required: true
   },
+  repoUrl: {
+    type: String,
+    required: true,
+  },
   username: {
     type: String,
     required: true

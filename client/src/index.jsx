@@ -19,13 +19,15 @@ class App extends React.Component {
     $.ajax({
       type: 'POST',
       url: 'http://localhost:1128/repos',
-      data: data,
-      success: ((data) => {
-        console.log('This is the data: ', data)
-      })
+      // request: $.post('http://localhost:1128/repos', {username: term}),
+      data: {username: term},
+      dataType: 'json',
+      success: data => { console.log('We have DATA!', data) },
+      error: data => { console.log('Whoops, try again', data)}
     })
-    // TODO
   }
+    
+    // TODO
 
   render () {
     return (<div>
