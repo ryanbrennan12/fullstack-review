@@ -1,5 +1,6 @@
 const request = require('request');
 const config = require('../config.js');
+const db = require('../database/index')
 
 console.log('This is my Token brah: ', config.TOKEN)
 let getReposByUsername = (username) => {
@@ -10,7 +11,7 @@ let getReposByUsername = (username) => {
   // The options object has been provided to help you out, 
   // but you'll have to fill in the URL
   let options = {
-    url: `https://api.github.com/users/${username}`,
+    url: `https://api.github.com/users/${username}/repos`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`
@@ -18,8 +19,9 @@ let getReposByUsername = (username) => {
   };
 
   request(options, (err, res, body) => {
-    console.log('this is the BODY in helpers', body)
-    //save my DB info here?
+    const data = JSON.parse(body);
+    db.save(data)
+    
   })
 
 }
