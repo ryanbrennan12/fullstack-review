@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const helper = require('../helpers/github.js')
 const db = require('../database/index.js')
 
+
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/../client/dist'))
@@ -12,6 +13,8 @@ app.use(express.static(__dirname + '/../client/dist'))
 
 app.post('/repos', function (req, res) {
   console.log('this is the body', req.body)
+  
+  helper.getReposByUsername(req.body.username)
   //invoke HELPER here which //db.save used inside helper
 
   // This route should take the github username provided
