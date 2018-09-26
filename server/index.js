@@ -22,9 +22,9 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
     Repo.find({}) //returns a promise
+    .sort({stars: -1})
     .then(repos => {
-      console.log('THESE ARE THE REPOS', repos)
-      .sort({stars: -1})
+      // console.log('THESE ARE THE REPOS', repos)
       res.send(repos)
     })
     .catch((err) => {
