@@ -16,6 +16,18 @@ class App extends React.Component {
 
   }
 
+  
+  
+  componentDidMount() {
+    //gets REPOS on Load
+    $.ajax({
+      type: 'GET',
+      url: 'http://localhost:1128/repos',
+      success: data => { console.log('REPOS ON LOAD: ', data)},
+      error: error => { console.log('ERROR, NO REPOS ', error)}
+    })
+  }
+    
   search (term) {
     console.log(`${term} was searched`);
     $.ajax({
@@ -25,11 +37,11 @@ class App extends React.Component {
       data: {username: term},
       dataType: 'json',
       success: data => { console.log('We have DATA!', data) },
-      error: data => { console.log('Whoops, try again', data)}
+      error: error => { console.log('Whoops, try again', error)}
     })
   }
     
-    // TODO
+  
 
   render () {
     return (<div>

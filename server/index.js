@@ -24,6 +24,7 @@ app.get('/repos', function (req, res) {
     Repo.find({}) //returns a promise
     .then(repos => {
       console.log('THESE ARE THE REPOS', repos)
+      .sort({stars: -1})
       res.send(repos)
     })
     .catch((err) => {

@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost/fetcher')
   console.log(err)
 });
 
-let repoSchema = mongoose.Schema({
+const repoSchema = mongoose.Schema({
   userId: {
     type: Number,
     required: true
@@ -29,6 +29,7 @@ let repoSchema = mongoose.Schema({
     required: true
   },
   repoURL: {
+    //for linking on client
     type: String,
     required: true
   },
