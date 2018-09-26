@@ -1,5 +1,5 @@
 import React from 'react';
-
+///state of search term.
 class Search extends React.Component {
   constructor(props) {
     super(props);
