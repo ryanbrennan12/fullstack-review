@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const exampleData = require('../data.json')
+// const exampleData = require('../data.json')
 
 mongoose.connect('mongodb://localhost/fetcher')
 .then(() => {
@@ -22,6 +22,7 @@ let repoSchema = mongoose.Schema({
     type: Number,
     required: true,
     unique: true
+    ///avoiding duplicates AQUI!
   },
   repoName: {
     type: String,
@@ -29,6 +30,10 @@ let repoSchema = mongoose.Schema({
   },
   repoURL: {
     type: String,
+    required: true
+  },
+  stars: {
+    type: Number,
     required: true
   }
 
@@ -42,13 +47,14 @@ let save = (data) => {
   const repos = JSON.parse(data);
 
   repos.forEach(repo => {
-   console.log('REPO', repo)
+  //  console.log('REPO', repo)
     new Repo({
       userId: repo.owner.id,
       userName: repo.owner.login,
       repoId: repo.id,
       repoName: repo.name,
-      repoURL: repo.html_url
+      repoURL: repo.html_url,
+      stars: repo.stargazers_count
     })
       .save().catch((err) => {
         console.log('ERRRORRR!!', err);

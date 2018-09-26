@@ -3,9 +3,9 @@ const config = require('../config.js');
 
 const db = require('../database/index')
 
-console.log('This is my Token brah: ', config.TOKEN)
+
 let getReposByUsername = (username) => {
-console.log('USERNAME ', username)
+
   // TODO - Use the request module to request repos for a specific
   // user from the github API
 
@@ -26,6 +26,12 @@ console.log('USERNAME ', username)
   })
 
 }
+
+let getReposByStars = () => {
+  
+}
+console.log('THESE ARE THE RESULTS')
+
       
 module.exports.getReposByUsername = getReposByUsername;
 
