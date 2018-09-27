@@ -1,7 +1,8 @@
 const request = require('request');
 const config = require('../config.js');
-
+// const mongoose = require('mongoose');
 const db = require('../database/index')
+// const Repo = mongoose.model('Repo');
 
 
 let getReposByUsername = (username) => {
@@ -9,8 +10,6 @@ let getReposByUsername = (username) => {
   // TODO - Use the request module to request repos for a specific
   // user from the github API
 
-  // The options object has been provided to help you out, 
-  // but you'll have to fill in the URL
   let options = {
     method: 'GET',
     url: `https://api.github.com/users/${username}/repos`,
@@ -22,15 +21,11 @@ let getReposByUsername = (username) => {
   
   request(options, (err, res, body) => {
     // const data = JSON.parse(body);
+
     db.save(body)
   })
-
 }
 
-let getReposByStars = () => {
-  
-}
-console.log('THESE ARE THE RESULTS')
 
       
 module.exports.getReposByUsername = getReposByUsername;

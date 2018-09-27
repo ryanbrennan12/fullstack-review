@@ -6,12 +6,12 @@ const RenderRepos = (props) => (
   <div>
   {props.repos.map((repo) => {
     return <RepoEntry repo={repo}/>
+  })}
+   </div> 
+  )
    
     // console.log(repo)
       
-  })}
-   </div> 
-)
 
 
 

@@ -12,19 +12,20 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/../client/dist'))
 
 app.post('/repos', function (req, res) {
-  console.log('this is the body', req.body)
+  // console.log('this is the body', req.body)
   
   helper.getReposByUsername(req.body.username)
   
-  // res.send('Successfully Saved!')
+  res.send('Successfully Saved!')
   //send is crashing my stuff
 });
 
 app.get('/repos', function (req, res) {
     Repo.find({}) //returns a promise
+    .limit(25)
     .sort({stars: -1})
     .then(repos => {
-      // console.log('THESE ARE THE REPOS', repos)
+      console.log('THESE ARE THE REPOS', repos)
       res.send(repos)
     })
     .catch((err) => {

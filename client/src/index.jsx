@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+import RenderRepos from './components/RenderRepos.jsx';
+import RepoEntry from './components/RepoEntry.jsx';
 import exampleData from '../../data.json'
 
 
@@ -11,15 +13,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      repos: []
+      repos: [],
+     
     }
-
   }
-
-
-
   componentDidMount() {
-    //gets REPOS on Load
+    //GETS REPOS on Load
     fetch('/repos')
       .then(res => res.json())
       .then((result) => {
@@ -31,33 +30,50 @@ class App extends React.Component {
 
   }
 
-
-
   search(term) {
+  
     console.log(`${term} was searched`);
     $.ajax({
       type: 'POST',
       url: 'http://localhost:1128/repos',
       // request: $.post('http://localhost:1128/repos', {username: term}),
       data: { username: term },
-      dataType: 'json',
-      success: data => { console.log('We have DATA!', data) },
-      error: error => { console.log('Whoops, try again', error) }
+      dataType: 'json'
+    }).done(() => {
+      fetch('/repos')
+      .then(res => res.json())
+      .then((result) => {
+        this.setState({
+          repos: result
+        })
+      }
+    )
+    }).fail(() => {
+      console.log('We Fail')
     })
   }
-
-
-
+      
   render() {
     return (<div>
       <h1>Github Fetcher</h1>
       <RepoList repos={this.state.repos} />
-      <Search onSearch={this.search.bind(this)} />
+      <Search onSearch={this.search.bind(this)} repos={this.state.repos} />
+      <RenderRepos repos ={this.state.repos} />
     </div>)
   }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+
+
+
+
+  
+  
+
+
+
   // $.ajax({
   //   type: 'GET',
   //   url: 'http://localhost:1128/repos',
