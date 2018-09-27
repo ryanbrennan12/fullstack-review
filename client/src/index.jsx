@@ -34,12 +34,13 @@ class App extends React.Component {
   
     console.log(`${term} was searched`);
     $.ajax({
-      type: 'POST',
-      url: 'http://localhost:1128/repos',
+      method: 'POST',
+      url: '/repos',
       // request: $.post('http://localhost:1128/repos', {username: term}),
       data: { username: term },
       dataType: 'json'
     }).done(() => {
+      console.log('this is done, we are now FETCHING')
       fetch('/repos')
       .then(res => res.json())
       .then((result) => {

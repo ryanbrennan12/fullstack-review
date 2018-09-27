@@ -43,9 +43,9 @@ const repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (data) => {
-
-  const repos = JSON.parse(data);
+let save = (repos, cb) => {
+  // console.log('WHAT IS this', typeof(data))
+  // const repos = JSON.parse(data);
 
   repos.forEach(repo => {
   //  console.log('REPO', repo)
@@ -61,6 +61,7 @@ let save = (data) => {
         console.log('ERRRORRR!!', err);
       })
   });
+  cb()
 }
 
 module.exports.save = save;

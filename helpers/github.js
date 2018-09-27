@@ -5,7 +5,7 @@ const db = require('../database/index')
 // const Repo = mongoose.model('Repo');
 
 
-let getReposByUsername = (username) => {
+let getReposByUsername = (username, cb) => {
 
   // TODO - Use the request module to request repos for a specific
   // user from the github API
@@ -20,9 +20,10 @@ let getReposByUsername = (username) => {
   };
   
   request(options, (err, res, body) => {
-    // const data = JSON.parse(body);
-
-    db.save(body)
+    const data = JSON.parse(body);
+    cb(data)
+    
+    // db.save(body, cb)
   })
 }
 

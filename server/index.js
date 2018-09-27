@@ -13,24 +13,31 @@ app.use(express.static(__dirname + '/../client/dist'))
 
 app.post('/repos', function (req, res) {
   // console.log('this is the body', req.body)
+   // TODO - your code here!
+  // This route should take the github username provided
+  // and get the repo information from the github API, then
+  // save the repo information in the database
   
-  helper.getReposByUsername(req.body.username)
+  helper.getReposByUsername(req.body.username, (data) => {
+    console.log('callback running');
+    db.save(data, () => {
+      res.redirect('/repos')
+    })
+  })
   
-  res.send('Successfully Saved!')
+  
   //send is crashing my stuff
 });
 
 app.get('/repos', function (req, res) {
     Repo.find({}) //returns a promise
-    .limit(25)
+    .limit(100)
     .sort({stars: -1})
-    .then(repos => {
+    .exec((err, repos) => {
       console.log('THESE ARE THE REPOS', repos)
-      res.send(repos)
+      res.json(repos)
     })
-    .catch((err) => {
-      console.log('ERROR IN GET ON SERVER', err)
-    })
+   
   
   // This route should send back the top 25 repos
 });
