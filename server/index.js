@@ -40,7 +40,7 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
   Repo.find({}) //returns a promise
-    .limit(100)
+    .limit(25)
     .sort({ stars: -1 })
     .exec((err, repos) => {
       // console.log('THESE ARE THE REPOS', repos)
