@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
-// const exampleData = require('../data.json')
 
-mongoose.connect('mongodb://localhost/fetcher')
+
+mongoose.connect('mongodb://heroku_rv896dgf:c5co21pjmp98d2jtinn5iffmml@ds117623.mlab.com:17623/heroku_rv896dgf')
 .then(() => {
   console.log('DATABASE CONNECTED!!!!')
 })
@@ -57,7 +56,8 @@ let save = (repos, cb) => {
       repoName: repo.name,
       repoURL: repo.html_url,
       stars: repo.stargazers_count
-    })
+    })      
+      // fetcher.repos.deleteMany({userName: repo.owner.login})
       .save().catch((err) => {
         console.log('ERRRORRR during save in DB!!', err);
       })

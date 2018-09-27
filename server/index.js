@@ -46,16 +46,22 @@ app.get('/repos', function (req, res) {
       // console.log('THESE ARE THE REPOS', repos)
       res.json(repos)
     })
+    // This route should send back the top 25 repos
+  });
 
 
-  // This route should send back the top 25 repos
-});
 
-let port = 1128;
+// let port = 1128;
+let port = process.env.PORT;
+if (port === null || port === '' || port === undefined) {
+  port = 1128;
+}
 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });
+
+
 
 // helper.getReposByUsername(req.body.username, (data) => {
 //   console.log('callback running');

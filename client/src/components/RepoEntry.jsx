@@ -2,7 +2,7 @@ import React from 'react';
 
 var RepoEntry = (props) => (
   
-  <div>
+  <div key={props.repo.repoId}>
     <p><strong><a href={props.repo.repoURL}>{props.repo.repoName}</a></strong></p>
     <p><strong>Repo ID: {props.repo.repoId}</strong></p>
     <p><strong>Stars: {props.repo.stars}</strong></p>
