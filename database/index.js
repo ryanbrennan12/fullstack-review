@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 // const exampleData = require('../data.json')
 
 mongoose.connect('mongodb://localhost/fetcher')
@@ -16,7 +17,7 @@ const repoSchema = mongoose.Schema({
   },
   userName: {
     type: String,
-    required: true
+    required: true,
   },
   repoId: {
     type: Number,
@@ -26,12 +27,12 @@ const repoSchema = mongoose.Schema({
   },
   repoName: {
     type: String,
-    required: true
+    required: true,
   },
   repoURL: {
     //for linking on client
     type: String,
-    required: true
+    required: true,
   },
   stars: {
     type: Number,
@@ -58,10 +59,10 @@ let save = (repos, cb) => {
       stars: repo.stargazers_count
     })
       .save().catch((err) => {
-        console.log('ERRRORRR!!', err);
+        console.log('ERRRORRR during save in DB!!', err);
       })
   });
-  cb()
+  cb()  //res.redirect to get request
 }
 
 module.exports.save = save;

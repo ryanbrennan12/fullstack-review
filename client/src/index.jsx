@@ -20,6 +20,7 @@ class App extends React.Component {
   componentDidMount() {
     //GETS REPOS on Load
     fetch('/repos')
+    //then passed data which is here is our RESPONSE object
       .then(res => res.json())
       .then((result) => {
         this.setState({

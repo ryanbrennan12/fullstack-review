@@ -6,7 +6,7 @@ const db = require('../database/index')
 
 
 let getReposByUsername = (username, cb) => {
-
+// console.log('what is the type', typeof(username))  PASSED AS A STRING
   // TODO - Use the request module to request repos for a specific
   // user from the github API
 
@@ -20,18 +20,25 @@ let getReposByUsername = (username, cb) => {
   };
   
   request(options, (err, res, body) => {
-    const data = JSON.parse(body);
-    cb(data)
-    
+    const dataArr = JSON.parse(body);
+    //calling anon func on save on data
+    cb(dataArr)  //
     // db.save(body, cb)
   })
 }
+ 
+
+    
 
 
       
 module.exports.getReposByUsername = getReposByUsername;
 
 
-
-
+//DATA IS WHAT WE GET FROM RUNNING FUNCTION
+// helper.getReposByUsername(username, (data) => {
+//   db.save(data, () => {
+//     res.red
+//   })
+// })
 
