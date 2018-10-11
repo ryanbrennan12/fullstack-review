@@ -36,10 +36,3 @@ let getReposByUsername = (username, cb) => {
 module.exports.getReposByUsername = getReposByUsername;
 
 
-//DATA IS WHAT WE GET FROM RUNNING FUNCTION
-// helper.getReposByUsername(username, (data) => {
-//   db.save(data, () => {
-//     res.red
-//   })
-// })
-
